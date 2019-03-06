@@ -2,15 +2,18 @@ import App from './App';
 import React from 'react';
 import express from 'express';
 import { renderToString } from 'react-dom/server';
+import awsMiddleware from 'aws-serverless-express/middleware';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 const server = express();
+const myPath = '/meinTest';
 
 server
   .disable('x-powered-by')
-  .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
-  .get('/*', (req, res) => {
+  .use(awsMiddleware.eventContext())
+  .use(myPath, express.static(process.env.RAZZLE_PUBLIC_DIR))
+  .get(myPath + '[/*]?', (req, res) => {
     const markup = renderToString(<App />);
     res.send(
       // prettier-ignore
