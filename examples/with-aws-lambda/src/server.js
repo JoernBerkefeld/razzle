@@ -7,7 +7,7 @@ import awsMiddleware from 'aws-serverless-express/middleware';
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 const server = express();
-const myPath = '/meinTest';
+const myPath = '/basicTest'; //TODO Change to name of Lambda function
 
 server
   .disable('x-powered-by')
