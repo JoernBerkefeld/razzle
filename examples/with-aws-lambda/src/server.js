@@ -7,14 +7,13 @@ import awsMiddleware from 'aws-serverless-express/middleware';
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 const server = express();
-const myPath = '/basicTest'; //TODO Change to name of Lambda function
 
 server
   .disable('x-powered-by')
   .use(awsMiddleware.eventContext())
-  .use(myPath, express.static(process.env.RAZZLE_PUBLIC_DIR))
-  .get(myPath + '[/*]?', (req, res) => {
-    const markup = renderToString(<App />);
+  .use(process.env.RAZZLE_PUBLIC_PATH_SHORT, express.static(process.env.RAZZLE_PUBLIC_DIR))
+  .get(process.env.RAZZLE_PUBLIC_PATH_SHORT + '[/*]?', (req, res) => {
+    const markup = renderToString( < App / > );
     res.send(
       // prettier-ignore
       `<!doctype html>
