@@ -13,7 +13,7 @@ server
   .use(awsMiddleware.eventContext())
   .use(process.env.RAZZLE_PUBLIC_PATH_SHORT, express.static(process.env.RAZZLE_PUBLIC_DIR))
   .get(process.env.RAZZLE_PUBLIC_PATH_SHORT + '[/*]?', (req, res) => {
-    const markup = renderToString( < App / > );
+    const markup = renderToString(<App />);
     res.send(
       // prettier-ignore
       `<!doctype html>
